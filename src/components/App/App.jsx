@@ -1,3 +1,23 @@
+import Castlist from 'components/CastList';
+import Header from 'components/Header';
+import ReviewsList from 'components/ReviewsList';
+import Homepage from 'pages/Homepage';
+import MovieDetails from 'pages/MovieDetails';
+import Movies from 'pages/Movies';
+import { Route, Routes } from 'react-router-dom';
+
 export const App = () => {
-  return <div>Hello World</div>;
+  return (
+    <>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/movies" element={<Movies />} />
+        <Route path="/movies/:movieID" element={<MovieDetails />}>
+          <Route path="cast" element={<Castlist />} />
+          <Route path="reviews" element={<ReviewsList />} />
+        </Route>
+      </Routes>
+    </>
+  );
 };
