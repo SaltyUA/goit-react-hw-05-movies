@@ -10,7 +10,7 @@ const Castlist = () => {
     getMovieCast(movieID)
       .then(data => setCast(data.cast))
       .catch(error => console.log(error));
-  }, []);
+  }, [movieID]);
   console.log(cast);
   return (
     <div>

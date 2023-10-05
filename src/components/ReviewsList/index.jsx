@@ -1,34 +1,36 @@
-import { useState } from 'react';
+import { getMovieReviews } from 'api/themoviedbAPI';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 const ReviewsList = () => {
-    const { movieID } = useParams();
-  const [reviews, setCast] = useState([]);
+  const { movieID } = useParams();
+  const [reviews, setReviews] = useState([]);
   useEffect(() => {
-    getMovieCast(movieID)
-      .then(data => setCast(data.results))
+    getMovieReviews(movieID)
+      .then(data => setReviews(data))
       .catch(error => console.log(error));
-  }, []);
+  }, [movieID]);
   console.log(reviews);
   return (
     <div>
       <h3>Reviews</h3>
-      {reviews && (
+      {reviews.length > 0 ? (
         <ul>
           {reviews.map(({ author, content, created_at }) => (
             <li>
               <div>
-                
                 <h2>{author}</h2>
-                <p>Character: {character}</p>
+                <p>Review: {content}</p>
+                <p>Created at: {created_at}</p>
               </div>
             </li>
           ))}
         </ul>
+      ) : (
+        <p>Поки ніхто не залишив відгук про цей фільм</p>
       )}
     </div>
   );
-};
 };
 
 export default ReviewsList;
