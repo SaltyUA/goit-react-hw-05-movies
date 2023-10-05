@@ -5,29 +5,41 @@ import { useParams } from 'react-router-dom';
 const ReviewsList = () => {
   const { movieID } = useParams();
   const [reviews, setReviews] = useState([]);
+  const [engRevivews, setEngRevivews] = useState(false);
   useEffect(() => {
-    getMovieReviews(movieID)
-      .then(data => setReviews(data))
-      .catch(error => console.log(error));
-  }, [movieID]);
-  console.log(reviews);
+    if (reviews.length === 0)
+      getMovieReviews(movieID, 'uk-UA')
+        .then(data => setReviews(data.results))
+        .catch(error => console.log(error));
+    if (reviews.length === 0)
+      getMovieReviews(movieID, 'en-US')
+        .then(data => {
+          setReviews(data.results);
+          setEngRevivews(true);
+        })
+        .catch(error => console.log(error));
+  }, [movieID, reviews]);
   return (
     <div>
-      <h3>Reviews</h3>
-      {reviews.length > 0 ? (
+      <h3>Огляди</h3>
+      {engRevivews && (
+        <p>
+          Нажаль, поки ніхто не залишив україномовні вігуки, але ось англомовні
+          відгуки
+        </p>
+      )}
+      {reviews.length > 0 && (
         <ul>
-          {reviews.map(({ author, content, created_at }) => (
-            <li>
+          {reviews.map(({ author, content, created_at, id }) => (
+            <li key={id}>
               <div>
-                <h2>{author}</h2>
-                <p>Review: {content}</p>
-                <p>Created at: {created_at}</p>
+                <p>{author}</p>
+                <p>{content}</p>
+                <p>Створено: {Date(created_at)}</p>
               </div>
             </li>
           ))}
         </ul>
-      ) : (
-        <p>Поки ніхто не залишив відгук про цей фільм</p>
       )}
     </div>
   );

@@ -14,26 +14,26 @@ const MovieDetails = () => {
   }, [movieID]);
 
   return (
-    <>
-      <Link to="/">Go back</Link>
+    <main>
+      <Link to="/">Назад</Link>
       {movie && (
         <article>
           <MovieCard movie={movie} />
           <div>
-            <p> Additional information</p>
+            <p>Додаткова інформація</p>
             <ul>
               <li>
-                <Link to="cast">Cast</Link>
+                <Link to="cast">В ролях</Link>
               </li>
               <li>
-                <Link to="Reviews">Reviews</Link>
+                <Link to="reviews">Огляди</Link>
               </li>
             </ul>
           </div>
           <Outlet />
         </article>
       )}
-    </>
+    </main>
   );
 };
 

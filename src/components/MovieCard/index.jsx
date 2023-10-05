@@ -25,11 +25,11 @@ const MovieCard = ({ movie }) => {
         <p>{release_date}</p>
         <p>{tagline}</p>
         <p>
-          User Score: {vote_average}({vote_count})
+          Оцінка користувачів: {vote_average}({vote_count})
         </p>
-        <h3>Overview</h3>
+        <h3>Опис</h3>
         <p>{overview}</p>
-        <h3>Genres</h3>
+        <h3>Жанри</h3>
         <p>{genres.map(genre => `${genre.name}`).join(', ')}</p>
       </div>
     </article>

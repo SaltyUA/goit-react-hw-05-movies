@@ -5,17 +5,16 @@ import React, { useEffect, useState } from 'react';
 const Homepage = () => {
   const [trendings, setTrendings] = useState([]);
   useEffect(() => {
-    getTrendingMovies('day')
+    getTrendingMovies()
       .then(data => setTrendings(data.results))
       .catch(error => {
         console.log(error);
-        window.alert('Something went wrong, try to reload');
+        // window.alert('Something went wrong, try to reload');
       });
   }, []);
-  console.log(trendings);
   return (
     <main>
-      <h2>Trending today</h2>
+      <h2>Популярні сьогодні</h2>
       <TrandingsList movies={trendings} />
     </main>
   );

@@ -1,12 +1,17 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 
-const Header = () => {
+const SharedLayout = () => {
   return (
-    <header>
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/movies">Movies</NavLink>
-    </header>
+    <>
+      <header>
+        <nav>
+          <NavLink to="/">Додому</NavLink>
+          <NavLink to="/movies">Фільми</NavLink>
+        </nav>
+      </header>
+      <Outlet />
+    </>
   );
 };
 
-export default Header;
+export default SharedLayout;
