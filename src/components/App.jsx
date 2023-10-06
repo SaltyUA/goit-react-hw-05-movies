@@ -19,7 +19,7 @@ export const App = () => {
             <Route path="cast" element={<Castlist />} />
             <Route path="reviews" element={<ReviewsList />} />
           </Route>
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Route>
       </Routes>
     </>
