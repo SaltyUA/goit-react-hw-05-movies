@@ -1,3 +1,11 @@
+import {
+  CardWrapper,
+  MoviePosterContainer,
+  OriginalTitle,
+  Tagline,
+  TitleWrapper,
+} from './MovieCard.styled';
+
 const MovieCard = ({ movie }) => {
   const {
     genres,
@@ -12,26 +20,32 @@ const MovieCard = ({ movie }) => {
   } = movie;
   return (
     <article>
-      <div>
-        <img
-          src={`https://image.tmdb.org/t/p/w300${poster_path}`}
-          alt={`${title} poster`}
-        />
-        <h2>
-          {title}
-          <span>({original_title})</span>
-          <span>{release_date.slice(0, 4)}</span>
-        </h2>
-        <p>{release_date}</p>
-        <p>{tagline}</p>
-        <p>
-          Оцінка користувачів: {vote_average}({vote_count})
-        </p>
-        <h3>Опис</h3>
-        <p>{overview}</p>
-        <h3>Жанри</h3>
-        <p>{genres.map(genre => `${genre.name}`).join(', ')}</p>
-      </div>
+      <CardWrapper>
+        <MoviePosterContainer>
+          <img
+            src={`https://image.tmdb.org/t/p/w300${poster_path}`}
+            alt={`${title} poster`}
+          />
+        </MoviePosterContainer>
+        <div>
+          <TitleWrapper>
+            <h2>{title}</h2>
+            <p>{release_date.slice(0, 4)}</p>
+          </TitleWrapper>
+          <OriginalTitle>({original_title})</OriginalTitle>
+          <Tagline>{tagline}</Tagline>
+
+          <h3>Опис</h3>
+          <p>{overview}</p>
+          <h3>Жанри</h3>
+          <p>{genres.map(genre => `${genre.name}`).join(', ')}</p>
+          {vote_count > 0 && (
+            <p>
+              Оцінка користувачів: {vote_average}({vote_count})
+            </p>
+          )}
+        </div>
+      </CardWrapper>
     </article>
   );
 };

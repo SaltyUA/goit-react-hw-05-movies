@@ -1,6 +1,9 @@
 import { getMovieCast } from 'api/themoviedbAPI';
+import { StyledList } from 'components/MoviesList/MovieList.styled';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { CastCard } from './CastList.styled';
+import { AdditionalInfoTitle } from 'components/MovieCard/MovieCard.styled';
 
 const Castlist = () => {
   const { movieID } = useParams();
@@ -12,22 +15,22 @@ const Castlist = () => {
   }, [movieID]);
   return (
     <div>
-      <h3>В ролях</h3>
+      <AdditionalInfoTitle>В ролях</AdditionalInfoTitle>
       {cast && (
-        <ul>
+        <StyledList>
           {cast.map(({ name, profile_path, character, id }) => (
             <li key={id}>
-              <div>
+              <CastCard>
                 <img
                   src={`https://image.tmdb.org/t/p/w200${profile_path}`}
                   alt={name}
                 />
                 <h2>{name}</h2>
-                <p>Персонаж: {character}</p>
-              </div>
+                <p>{character}</p>
+              </CastCard>
             </li>
           ))}
-        </ul>
+        </StyledList>
       )}
     </div>
   );
