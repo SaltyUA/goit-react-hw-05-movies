@@ -1,12 +1,19 @@
 import { getMovieByID } from 'api/themoviedbAPI';
 import MovieCard from 'components/MovieCard';
-import { useEffect, useState } from 'react';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import {
+  AdditionalInfo,
+  AdditionalInfoLink,
+  GoBackLink,
+} from 'components/MovieCard/MovieCard.styled';
+import { Suspense, useEffect, useState } from 'react';
+import Skeleton from 'react-loading-skeleton';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
   const { movieID } = useParams();
-
+  const location = useLocation();
+  const backLinkHref = location.state?.from ?? '/';
   useEffect(() => {
     getMovieByID(movieID)
       .then(data => setMovie(data))
@@ -15,22 +22,24 @@ const MovieDetails = () => {
 
   return (
     <main>
-      <Link to="/">Назад</Link>
+      <GoBackLink to={backLinkHref}>&#171; Повернутись назад</GoBackLink>
       {movie && (
         <article>
           <MovieCard movie={movie} />
-          <div>
+          <AdditionalInfo>
             <p>Додаткова інформація</p>
             <ul>
               <li>
-                <Link to="cast">В ролях</Link>
+                <AdditionalInfoLink to="cast">В ролях</AdditionalInfoLink>
               </li>
               <li>
-                <Link to="reviews">Огляди</Link>
+                <AdditionalInfoLink to="reviews">Огляди</AdditionalInfoLink>
               </li>
             </ul>
-          </div>
-          <Outlet />
+          </AdditionalInfo>
+          <Suspense fallback={<Skeleton count={3} />}>
+            <Outlet />
+          </Suspense>
         </article>
       )}
     </main>

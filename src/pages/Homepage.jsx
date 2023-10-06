@@ -1,5 +1,5 @@
 import { getTrendingMovies } from 'api/themoviedbAPI';
-import TrandingsList from 'components/TrendingsList';
+import MoviesList from 'components/MoviesList';
 import React, { useEffect, useState } from 'react';
 
 const Homepage = () => {
@@ -9,13 +9,13 @@ const Homepage = () => {
       .then(data => setTrendings(data.results))
       .catch(error => {
         console.log(error);
-        // window.alert('Something went wrong, try to reload');
+        window.alert('Something went wrong, try to reload');
       });
   }, []);
   return (
     <main>
       <h2>Популярні сьогодні</h2>
-      <TrandingsList movies={trendings} />
+      <MoviesList movies={trendings} />
     </main>
   );
 };
