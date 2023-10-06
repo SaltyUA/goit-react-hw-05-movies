@@ -14,12 +14,16 @@ const Movies = () => {
   const searchQuery = searchParams.get('query');
 
   useEffect(() => {
-    if (searchQuery === '') return;
+    if (!searchQuery || searchQuery === '') return;
     setIsLoading(true);
     setFindedMovies([]);
     getMoviesByQuery(searchQuery)
       .then(data => {
-        if (data.results.length > 0) setFindedMovies(data.results);
+        if (data.results.length === 0) {
+          toast.warn(`Не вдалось знайти фільми за цим запитом`);
+          return;
+        }
+        setFindedMovies(data.results);
       })
       .catch(error => console.log(error))
       .finally(() => setIsLoading(false));
