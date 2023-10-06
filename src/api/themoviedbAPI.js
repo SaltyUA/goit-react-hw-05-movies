@@ -12,6 +12,15 @@ export async function getTrendingMovies() {
   return response.data;
 }
 
+export async function getMoviesByQuery(query) {
+  const response = await axios('search/movie', {
+    params: {
+      query,
+    },
+  });
+  return response.data;
+}
+
 export async function getMovieByID(id) {
   const response = await axios(`movie/${id}`);
   return response.data;
