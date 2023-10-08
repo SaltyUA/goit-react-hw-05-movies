@@ -1,4 +1,4 @@
-import { getMovieByID } from 'api/themoviedbAPI';
+import { getMovieByID } from 'service/themoviedbAPI';
 import MovieCard from 'components/MovieCard';
 import {
   AdditionalInfo,
@@ -30,10 +30,14 @@ const MovieDetails = () => {
             <p>Додаткова інформація</p>
             <ul>
               <li>
-                <AdditionalInfoLink to="cast">В ролях</AdditionalInfoLink>
+                <AdditionalInfoLink to="cast" state={{ from: backLinkHref }}>
+                  В ролях
+                </AdditionalInfoLink>
               </li>
               <li>
-                <AdditionalInfoLink to="reviews">Огляди</AdditionalInfoLink>
+                <AdditionalInfoLink to="reviews" state={{ from: backLinkHref }}>
+                  Огляди
+                </AdditionalInfoLink>
               </li>
             </ul>
           </AdditionalInfo>

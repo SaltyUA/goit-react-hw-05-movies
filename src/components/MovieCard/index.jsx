@@ -1,3 +1,4 @@
+import { getPoster } from 'service/getImage';
 import {
   CardWrapper,
   MoviePosterContainer,
@@ -18,14 +19,13 @@ const MovieCard = ({ movie }) => {
     vote_average,
     vote_count,
   } = movie;
+
+  const poster = getPoster(poster_path, 300);
   return (
     <article>
       <CardWrapper>
         <MoviePosterContainer>
-          <img
-            src={`https://image.tmdb.org/t/p/w300${poster_path}`}
-            alt={`${title} poster`}
-          />
+          <img src={poster} alt={`${title} poster`} />
         </MoviePosterContainer>
         <div>
           <TitleWrapper>

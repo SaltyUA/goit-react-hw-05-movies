@@ -1,4 +1,4 @@
-import { getTrendingMovies } from 'api/themoviedbAPI';
+import { getTrendingMovies } from 'service/themoviedbAPI';
 import MoviesList from 'components/MoviesList';
 import React, { useEffect, useState } from 'react';
 

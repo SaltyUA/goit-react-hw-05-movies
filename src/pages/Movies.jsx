@@ -1,4 +1,4 @@
-import { getMoviesByQuery } from 'api/themoviedbAPI';
+import { getMoviesByQuery } from 'service/themoviedbAPI';
 import MoviesList from 'components/MoviesList';
 import Searchbar from 'components/Searchbar';
 import { useEffect, useState } from 'react';

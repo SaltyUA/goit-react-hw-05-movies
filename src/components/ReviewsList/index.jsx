@@ -1,4 +1,4 @@
-import { getMovieReviews } from 'api/themoviedbAPI';
+import { getMovieReviews } from 'service/themoviedbAPI';
 import { AdditionalInfoTitle } from 'components/MovieCard/MovieCard.styled';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
